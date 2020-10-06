@@ -6,5 +6,6 @@ public class Class1
 	{
 		// THis is mine
 		// Hello world!
+		// wassup
 	}
 }
