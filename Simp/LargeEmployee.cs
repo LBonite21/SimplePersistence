@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Simp
 {
-    class LargeEmployee
+    public class LargeEmployee : Employee
     {
+        byte[] someData = { };
     }
 }
