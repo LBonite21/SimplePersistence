@@ -13,15 +13,22 @@
         public void run()
         {
             RecordsUI info = new RecordsUI();
-            Selection(info.MenuSelection());
+            while (!ChoiceSelected)
+            {
+                Selection(info.MenuSelection());
+            }
+            
         }
 
-        public void Selection(int UserSelction)
+        public bool Selection(int UserSelction)
         {
-            do
-            {
+           
                 switch (UserSelction)
                 {
+                    case 0:
+                        System.Console.WriteLine("Closing . . . . . .");
+                        ChoiceSelected = true;
+                        break;
                     case 1:
                         CreateEmployeeRecord();
                         System.Console.WriteLine("yes 1");
@@ -37,11 +44,10 @@
 
                     default:
                         System.Console.WriteLine("Please enter the number options of 1 or 2");
-                       
-                        return;
+                        break;
                 }
 
-            } while (!ChoiceSelected);
+            return ChoiceSelected;
 
 
         }
