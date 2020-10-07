@@ -1,8 +1,8 @@
 ﻿namespace Simp
 {
-    internal class Controller
+    internal class RecordsUI
     {
-        public Controller()
+        public RecordsUI()
         {
             
         }
