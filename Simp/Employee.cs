@@ -24,6 +24,11 @@ namespace Simp
             this.HireYear = hireYear;
         }
 
+        public Employee()
+        {
+
+        }
+
         public override string ToString()
         {
             return $"ID: {ID} First Name: {FirstName} Last Name: {LastName} Hire Year: {HireYear}";
