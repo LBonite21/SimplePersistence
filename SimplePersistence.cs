@@ -1,12 +1,9 @@
 ﻿using System;
 
-public class Class1
+public class SimplePersistence
 {
-	public Class1()
+	public Run()
 	{
-		// THis is mine
-		// Hello world!
-		// wassup
-		// yuh
+		
 	}
 }
