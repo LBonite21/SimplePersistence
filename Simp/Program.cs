@@ -6,7 +6,8 @@ namespace Simp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SimplePersistence EmployeeInfo = new SimplePersistence();
+            EmployeeInfo.run();
         }
     }
 }
