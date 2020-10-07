@@ -6,7 +6,9 @@ namespace Simp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Employee jon = new Employee(1, "Jon", "Doe", 2020);
+
+            Console.WriteLine(jon);
         }
     }
 }
