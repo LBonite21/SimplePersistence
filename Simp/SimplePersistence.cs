@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 
 namespace Simp
 {
@@ -34,14 +32,14 @@ namespace Simp
                     ChoiceSelected = true;
                     break;
                 case 1:
-                    PrintEmployee(@"C:\Users\Anibal Tinoco\source\repos\SimplePersistence\Simp\people\simple\");
+                    PrintEmployee($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
                     System.Console.WriteLine("yes 1");
                     ChoiceSelected = true;
                     break;
 
                 case 2:
 
-                    PrintPeopleDetails($@"D:\temp\people\simple\");
+                    PrintPeopleDetails($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
                     System.Console.WriteLine("yes 2");
                     ChoiceSelected = true;
                     break;
@@ -58,31 +56,24 @@ namespace Simp
 
         public void PrintEmployee(string path)
         {
-            //take that path
-            //grab the file split
-            //create a user with that info
-            //display it to the user
-
-            
-            
-
-            for (int i = 1; i < 10; i++)
-            {
-                string pathpath = path + $"{i}.txt";
-
-                List<string> lines = new List<string>();
-
-               
-                
-                //lines = File.ReadAllText(pathpath).ToList;
-                
-                System.Console.WriteLine();
-            }
 
         }
 
         public void PrintPeopleDetails(string path)
         {
+            //take that path
+            //grab the file split
+            //create a user with that info
+            //display it to the user
+
+            string[] people = Directory.GetFiles(path, "*.txt");
+
+            foreach (string person in people)
+            {
+                string getTextFile = System.IO.File.ReadAllText(person);
+                System.Console.WriteLine(getTextFile);
+            }
+
 
         }
     }
