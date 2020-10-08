@@ -30,14 +30,14 @@
                     ChoiceSelected = true;
                     break;
                 case 1:
-                    PrintEmployee($@"D:\temp\people\simple\");
+                    PrintEmployee($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
                     System.Console.WriteLine("yes 1");
                     ChoiceSelected = true;
                     break;
 
                 case 2:
 
-                    PrintPeopleDetails($@"D:\temp\people\simple\");
+                    PrintPeopleDetails($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
                     System.Console.WriteLine("yes 2");
                     ChoiceSelected = true;
                     break;
@@ -63,6 +63,13 @@
             //grab the file split
             //create a user with that info
             //display it to the user
+
+            for (int i = 0; i < 9; i++)
+            {
+                //string getTextFile = System.IO.File.ReadAllText($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple\{i}.txt");
+                System.Console.WriteLine(i);
+            }
+
         }
     }
 }
