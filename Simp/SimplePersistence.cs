@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Simp
 {
@@ -33,14 +34,14 @@ namespace Simp
                     break;
                 case 1:
                     PrintEmployee($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
-                    System.Console.WriteLine("yes 1");
+                    //System.Console.WriteLine("yes 1");
                     ChoiceSelected = true;
                     break;
 
                 case 2:
 
                     PrintPeopleDetails($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
-                    System.Console.WriteLine("yes 2");
+                    //System.Console.WriteLine("yes 2");
                     ChoiceSelected = true;
                     break;
 
@@ -56,6 +57,30 @@ namespace Simp
 
         public void PrintEmployee(string path)
         {
+
+            
+
+            string[] people = Directory.GetFiles(path, "*.txt");
+            string[] persons = { };
+
+            foreach (string person in people)
+            {
+                string getTextFile = System.IO.File.ReadAllText(person);
+                persons = getTextFile.Split(",");
+
+                //foreach (string data in persons)
+                //{
+                //    System.Console.Write(data);
+                //}
+
+                for (int i = 0; i < persons.Length / 4; i++)
+                {
+                    int id = Int32.Parse(persons[0]);
+                    int hireYear = Int32.Parse(persons[3]);
+                    Employee newEmployee = new Employee(id, persons[1], persons[2], hireYear);
+                    System.Console.WriteLine(newEmployee);
+                }
+            }
 
         }
 
