@@ -23,6 +23,8 @@ namespace Simp
 
         }
 
+        //C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple
+
         public bool Selection(int UserSelction)
         {
 
@@ -34,15 +36,14 @@ namespace Simp
                     break;
                 case 1:
                     Console.WriteLine("Add a file path");
-                    getPath(System.Console.ReadLine());
-                    //System.Console.WriteLine("yes 1");
+                    PrintEmployee(getPath(System.Console.ReadLine()) + @"\");
                     ChoiceSelected = true;
                     break;
 
                 case 2:
 
-                    PrintPeopleDetails($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
-                    //System.Console.WriteLine("yes 2");
+                    Console.WriteLine("Add a file path");
+                    PrintPeopleDetails(getPath(System.Console.ReadLine()) + @"\");
                     ChoiceSelected = true;
                     break;
 
@@ -55,14 +56,20 @@ namespace Simp
 
 
         }
-        public void getPath(string usersPath)
+
+        public string getPath(string usersPath)
         {
-            PrintEmployee("@"+ usersPath + @"\");
+            //Console.WriteLine(usersPath + @"\");
+            //PrintEmployee(usersPath + @"\");
+
+            return usersPath;
         }
+
         public void PrintEmployee(string path)
         {
 
-            
+
+            System.Console.WriteLine("\n");
 
             string[] people = Directory.GetFiles(path, "*.txt");
             string[] persons = { };
@@ -94,6 +101,7 @@ namespace Simp
             //grab the file split
             //create a user with that info
             //display it to the user
+            System.Console.WriteLine("\n");
 
             string[] people = Directory.GetFiles(path, "*.txt");
 
