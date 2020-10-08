@@ -74,7 +74,7 @@ namespace Simp
 
                
                 
-                lines = File.ReadAllText(pathpath).ToList;
+                //lines = File.ReadAllText(pathpath).ToList;
                 
                 System.Console.WriteLine();
             }
