@@ -33,7 +33,8 @@ namespace Simp
                     ChoiceSelected = true;
                     break;
                 case 1:
-                    PrintEmployee($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple");
+                    Console.WriteLine("Add a file path");
+                    getPath(System.Console.ReadLine());
                     //System.Console.WriteLine("yes 1");
                     ChoiceSelected = true;
                     break;
@@ -54,7 +55,10 @@ namespace Simp
 
 
         }
-
+        public void getPath(string usersPath)
+        {
+            PrintEmployee("@"+ usersPath + @"\");
+        }
         public void PrintEmployee(string path)
         {
 
