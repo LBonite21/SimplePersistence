@@ -1,4 +1,6 @@
-﻿namespace Simp
+﻿using System.IO;
+
+namespace Simp
 {
     internal class SimplePersistence
     {
@@ -64,11 +66,14 @@
             //create a user with that info
             //display it to the user
 
-            for (int i = 0; i < 9; i++)
+            string[] people = Directory.GetFiles(path, "*.txt");
+
+            foreach (string person in people)
             {
-                //string getTextFile = System.IO.File.ReadAllText($@"C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple\{i}.txt");
-                System.Console.WriteLine(i);
+                string getTextFile = System.IO.File.ReadAllText(person);
+                System.Console.WriteLine(getTextFile);
             }
+
 
         }
     }
