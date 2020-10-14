@@ -69,6 +69,14 @@ namespace Simp
                     break;
                 case 4:
                     Console.WriteLine("Delete Employee");
+                    Console.WriteLine("Add a file path");
+                    string path = Console.ReadLine();
+                    Console.WriteLine("What is the ID of the employee you are gonna delete?");
+
+                    string idString = Console.ReadLine();
+                    int id = Int32.Parse(idString);
+
+                    DeleteEmoployee(getPath(path), id);
                     ChoiceSelected = true;
                     break;
                 case 5:
@@ -100,17 +108,12 @@ namespace Simp
             System.Console.WriteLine("\n");
 
             string[] people = Directory.GetFiles(path, "*.txt");
-            string[] persons = { };
+            string[] persons;
 
             foreach (string person in people)
             {
                 string getTextFile = System.IO.File.ReadAllText(person);
                 persons = getTextFile.Split(",");
-
-                //foreach (string data in persons)
-                //{
-                //    System.Console.Write(data);
-                //}
 
                 for (int i = 0; i < persons.Length / 4; i++)
                 {
@@ -159,9 +162,17 @@ namespace Simp
             // Adds a new file to the ${path} directory with the new details
         }
 
-        private void DeleteEmoployee(int id)
+        private void DeleteEmoployee(string path, int id)
         {
             // Deletes the record that matches the given id if it exists
+            System.Console.WriteLine("\n");
+
+            string[] people = Directory.GetFiles(path, "*.txt");
+            string file = $"{id}.txt";
+            string deleteFile = $@"{path}\{file}";
+            File.Delete(deleteFile);
+            Console.WriteLine($"Deleted {file}");
+
         }
 
         private void UpdateEmployee(int id,string  firstName,string lastName,int HireYear)
