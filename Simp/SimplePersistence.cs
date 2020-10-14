@@ -149,9 +149,9 @@ namespace Simp
         {
             String EmployeeRawData = id.ToString() + "," + firstName + "," + lastName + "," + HireYear.ToString();
 
-            String path = getPath();
+            String path = getPath(System.Console.ReadLine()) + @"\";
 
-            System.IO.File.WriteAllText(+${id}.txt", EmployeeRawData);
+            System.IO.File.WriteAllText(path+$"{id}.txt", EmployeeRawData);
 
             Employee newEmployee = new Employee(id, firstName, lastName, HireYear);
 
