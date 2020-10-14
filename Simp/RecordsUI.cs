@@ -31,5 +31,16 @@
             return input;
         }
 
+        public string getPath(string message)
+        {
+            System.Console.WriteLine(message);
+            string usersPath = System.Console.ReadLine() + @"\";
+
+            //Console.WriteLine(usersPath + @"\");
+            //PrintEmployee(usersPath + @"\");
+
+            return usersPath;
+        }
+
     }
 }

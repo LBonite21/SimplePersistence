@@ -48,14 +48,12 @@ namespace Simp
                     Environment.Exit(0);
                     break;
                 case 1:
-                    Console.WriteLine("Add a file path");
-                    PrintEmployee(getPath(System.Console.ReadLine()) + @"\");
+                    PrintEmployee(info.getPath("Add a file path"));
                     ChoiceSelected = true;
                     break;
 
                 case 2:
-                    Console.WriteLine("Add a file path");
-                    PrintPeopleDetails(getPath(System.Console.ReadLine()) + @"\");
+                    PrintPeopleDetails(info.getPath("Add a file path"));
                     ChoiceSelected = true;
                     break;
                 case 3:
@@ -69,14 +67,12 @@ namespace Simp
                     break;
                 case 4:
                     Console.WriteLine("Delete Employee");
-                    Console.WriteLine("Add a file path");
-                    string path = Console.ReadLine();
                     Console.WriteLine("What is the ID of the employee you are gonna delete?");
 
                     string idString = Console.ReadLine();
                     int id = Int32.Parse(idString);
 
-                    DeleteEmoployee(getPath(path), id);
+                    DeleteEmoployee(info.getPath("Add a file path"), id);
                     ChoiceSelected = true;
                     break;
                 case 5:
@@ -91,14 +87,6 @@ namespace Simp
             return ChoiceSelected;
 
 
-        }
-
-        public string getPath(string usersPath)
-        {
-            //Console.WriteLine(usersPath + @"\");
-            //PrintEmployee(usersPath + @"\");
-
-            return usersPath;
         }
 
         public void PrintEmployee(string path)
@@ -149,9 +137,7 @@ namespace Simp
         {
             String EmployeeRawData = id.ToString() + "," + firstName + "," + lastName + "," + HireYear.ToString();
 
-            String path = getPath(System.Console.ReadLine()) + @"\";
-
-            System.IO.File.WriteAllText(path+$"{id}.txt", EmployeeRawData);
+            System.IO.File.WriteAllText(info.getPath("Add a file path") +$"{id}.txt", EmployeeRawData);
 
             Employee newEmployee = new Employee(id, firstName, lastName, HireYear);
 
