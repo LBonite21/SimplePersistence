@@ -149,7 +149,6 @@ namespace Simp
             // Deletes the record that matches the given id if it exists
             System.Console.WriteLine("\n");
 
-            string[] people = Directory.GetFiles(path, "*.txt");
             string file = $"{id}.txt";
             string deleteFile = $@"{path}\{file}";
             File.Delete(deleteFile);
