@@ -16,10 +16,25 @@ namespace Simp
         public void run()
         {
             RecordsUI info = new RecordsUI();
-            while (!ChoiceSelected)
+
+            //bool repeat = false;
+            ChoiceSelected = false;
+
+            bool repeat = ChoiceSelected;
+
+            //while (!ChoiceSelected)
+            //{
+            //    Selection(info.MenuSelection());
+            //    ChoiceSelected = true;
+            //}
+
+            do
             {
+
                 Selection(info.MenuSelection());
-            }
+                //ChoiceSelected = true;
+
+            } while (ChoiceSelected);
 
         }
 
