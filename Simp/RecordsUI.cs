@@ -16,6 +16,20 @@
             return input;
         }
 
+        public int RequestInt(string message)
+        {
+            System.Console.Write(message);
+            int input = int.Parse(System.Console.ReadLine());
+            return input;
+        }
+
+        public string RequestString(string message)
+        {
+            System.Console.Write(message);
+            string input = System.Console.ReadLine();
+
+            return input;
+        }
 
     }
 }
