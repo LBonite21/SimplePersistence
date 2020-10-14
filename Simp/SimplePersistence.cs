@@ -125,5 +125,37 @@ namespace Simp
 
 
         }
+
+        private void AddEmployee(int id, string firstName, string lastName, int HireYear)
+        {
+            // Adds a new file to the ${path} directory with the new details
+        }
+
+        private void DeleteEmoployee(int id)
+        {
+            // Deletes the record that matches the given id if it exists
+        }
+
+        private void UpdateEmployee(int id,string  firstName,string lastName,int HireYear)
+        {
+            // Updates the correct file if it exists.
+            // Should not be able to change the id of a user.
+        }
+
+        private void SerializeAllEmployees()
+        {
+            // Iterate through all the files in the ${path} directory
+            // Create an Employee object for each file
+            // Serialize each Employee object to the /${path}serialized/ directory in it's own file.
+
+        }
+
+        private void GetSerializedEmployee(int id)
+        {
+            // Takes an id as a parameter
+            // Fetches the associated serialized employee file and de-serializes it to an Employee object
+            // Returns the Employee object
+            throw new NotImplementedException();
+        }
     }
 }
