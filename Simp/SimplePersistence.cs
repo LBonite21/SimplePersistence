@@ -53,12 +53,22 @@ namespace Simp
                     break;
 
                 case 2:
-
                     Console.WriteLine("Add a file path");
                     PrintPeopleDetails(getPath(System.Console.ReadLine()) + @"\");
                     ChoiceSelected = true;
                     break;
-
+                case 3:
+                    Console.WriteLine("Add Employee");
+                    ChoiceSelected = true;
+                    break;
+                case 4:
+                    Console.WriteLine("Delete Employee");
+                    ChoiceSelected = true;
+                    break;
+                case 5:
+                    Console.WriteLine("Update Employee");
+                    ChoiceSelected = true;
+                    break;
                 default:
                     System.Console.WriteLine("Please enter the number options of 1 or 2");
                     break;
