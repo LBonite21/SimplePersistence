@@ -10,7 +10,7 @@
         public int MenuSelection()
         {
             System.Console.WriteLine();
-            System.Console.WriteLine("- Employee Info Stuff -\n  1: Create New Employee \n  2: Go Through Records");
+            System.Console.WriteLine("- Employee Info Stuff -\n  1: Create New Employee \n  2: Go Through Records \n  0: Exit");
             System.Console.Write("Enter Choice: ");
             int input = int.Parse(System.Console.ReadLine());
             return input;

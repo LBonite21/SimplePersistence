@@ -6,4 +6,10 @@
     <Win32Resource></Win32Resource>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="people\long serialized\" />
+    <Folder Include="people\large serialized\" />
+    <Folder Include="people\simple serialized\" />
+  </ItemGroup>
+
 </Project>
