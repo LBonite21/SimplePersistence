@@ -17,24 +17,24 @@ namespace Simp
         {
             RecordsUI info = new RecordsUI();
 
-            //bool repeat = false;
-            ChoiceSelected = false;
-
-            bool repeat = ChoiceSelected;
-
-            //while (!ChoiceSelected)
-            //{
-            //    Selection(info.MenuSelection());
-            //    ChoiceSelected = true;
-            //}
-
-            do
+            while (!ChoiceSelected)
             {
-
                 Selection(info.MenuSelection());
-                //ChoiceSelected = true;
+                ChoiceSelected = true;
+            }
 
-            } while (ChoiceSelected);
+            //bool repeat = false;
+            //ChoiceSelected = false;
+
+            //bool repeat = ChoiceSelected;
+
+            //do
+            //{
+
+            //    Selection(info.MenuSelection());
+            //    //ChoiceSelected = true;
+
+            //} while (ChoiceSelected);
 
         }
 
