@@ -7,6 +7,7 @@ namespace Simp
     {
 
         private bool ChoiceSelected;
+        RecordsUI info = new RecordsUI();
 
         public SimplePersistence()
         {
@@ -15,7 +16,7 @@ namespace Simp
 
         public void run()
         {
-            RecordsUI info = new RecordsUI();
+            
 
             //while (!ChoiceSelected)
             //{
@@ -58,7 +59,12 @@ namespace Simp
                     ChoiceSelected = true;
                     break;
                 case 3:
-                    Console.WriteLine("Add Employee");
+                    Console.WriteLine("\nAdd Employee\n");
+                    AddEmployee(
+                        info.RequestInt("Enter New Employee ID: "), 
+                        info.RequestString("Enter First Name: "),
+                        info.RequestString("Enter Last Name: "),
+                        info.RequestInt("Enter Hire Year: "));
                     ChoiceSelected = true;
                     break;
                 case 4:
@@ -141,6 +147,18 @@ namespace Simp
 
         private void AddEmployee(int id, string firstName, string lastName, int HireYear)
         {
+            String EmployeeRawData = id.ToString() + "," + firstName + "," + lastName + "," + HireYear.ToString();
+
+            String path = getPath(System.Console.ReadLine()) + @"\";
+
+            System.IO.File.WriteAllText(path+$"{id}.txt", EmployeeRawData);
+
+            Employee newEmployee = new Employee(id, firstName, lastName, HireYear);
+
+            Console.WriteLine(newEmployee);
+
+
+
             // Adds a new file to the ${path} directory with the new details
         }
 
