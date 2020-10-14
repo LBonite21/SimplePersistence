@@ -17,24 +17,20 @@ namespace Simp
         {
             RecordsUI info = new RecordsUI();
 
-            while (!ChoiceSelected)
-            {
-                Selection(info.MenuSelection());
-                ChoiceSelected = true;
-            }
-
-            //bool repeat = false;
-            //ChoiceSelected = false;
-
-            //bool repeat = ChoiceSelected;
-
-            //do
+            //while (!ChoiceSelected)
             //{
-
             //    Selection(info.MenuSelection());
-            //    //ChoiceSelected = true;
+            //    ChoiceSelected = true;
+            //}
 
-            //} while (ChoiceSelected);
+            ChoiceSelected = false;
+
+            do
+            {
+
+                Selection(info.MenuSelection());
+
+            } while (ChoiceSelected);
 
         }
 
@@ -48,6 +44,7 @@ namespace Simp
                 case 0:
                     System.Console.WriteLine("Closing . . . . . .");
                     ChoiceSelected = true;
+                    Environment.Exit(0);
                     break;
                 case 1:
                     Console.WriteLine("Add a file path");
