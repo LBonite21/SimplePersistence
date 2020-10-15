@@ -42,5 +42,10 @@
             return usersPath;
         }
 
+        public string UpdatingMenu(string message)
+        {
+            return "nothing yet";
+        }
+
     }
 }
