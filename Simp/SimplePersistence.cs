@@ -58,7 +58,7 @@ namespace Simp
                     break;
                 case 3:
                     Console.WriteLine("\nAdd Employee\n");
-                    AddEmployee(
+                    AddEmployee(info.getPath("Add a file path"),
                         info.RequestInt("Enter New Employee ID: "), 
                         info.RequestString("Enter First Name: "),
                         info.RequestString("Enter Last Name: "),
@@ -66,17 +66,24 @@ namespace Simp
                     ChoiceSelected = true;
                     break;
                 case 4:
-                    Console.WriteLine("Delete Employee");
+                    Console.WriteLine("\nDelete Employee\n");
                     Console.WriteLine("What is the ID of the employee you are gonna delete?");
 
                     string idString = Console.ReadLine();
                     int id = Int32.Parse(idString);
 
-                    DeleteEmoployee(info.getPath("Add a file path"), id);
+                    DeleteEmployee(info.getPath("Add a file path"), id);
                     ChoiceSelected = true;
                     break;
                 case 5:
                     Console.WriteLine("Update Employee");
+                    string filePath = info.getPath("Add a file path");
+                    int EmployeeID = SearchEmployee(info.RequestInt("What is the ID of the employee you are gonna update? "),filePath);
+
+                    UpdateEmployee(filePath, EmployeeID,
+                        info.RequestString("Update First Name: "),
+                        info.RequestString("Update New Last Name: "),
+                        info.RequestInt("Update Hire Year: ")); 
                     ChoiceSelected = true;
                     break;
                 default:
@@ -133,11 +140,11 @@ namespace Simp
 
         }
 
-        private void AddEmployee(int id, string firstName, string lastName, int HireYear)
+        private void AddEmployee(string path, int id, string firstName, string lastName, int HireYear)
         {
-            String EmployeeRawData = id.ToString() + "," + firstName + "," + lastName + "," + HireYear.ToString();
+            String EmployeeRawData = id.ToString() + ", " + firstName.ToUpper() + ", " + lastName.ToUpper() + ", " + HireYear.ToString();
 
-            System.IO.File.WriteAllText(info.getPath("Add a file path") +$"{id}.txt", EmployeeRawData);
+            System.IO.File.WriteAllText(path +$"{id}.txt", EmployeeRawData);
 
             Employee newEmployee = new Employee(id, firstName, lastName, HireYear);
 
@@ -148,7 +155,7 @@ namespace Simp
             // Adds a new file to the ${path} directory with the new details
         }
 
-        private void DeleteEmoployee(string path, int id)
+        private void DeleteEmployee(string path, int id)
         {
             // Deletes the record that matches the given id if it exists
             System.Console.WriteLine("\n");
@@ -160,10 +167,23 @@ namespace Simp
 
         }
 
-        private void UpdateEmployee(int id,string  firstName,string lastName,int HireYear)
+        private int SearchEmployee(int id, string path)
         {
+            string[] people = Directory.GetFiles(path, $"{id}.txt");
+            string file = $"{id}.txt";
+            Console.WriteLine(System.IO.File.ReadAllText(people[0]));
+            return id;
+        }
+
+        private void UpdateEmployee(string path, int id,string  firstName,string lastName,int HireYear)
+        {
+            DeleteEmployee(path, id);
+            AddEmployee(path, id, firstName, lastName, HireYear);
+            
+
             // Updates the correct file if it exists.
-            // Should not be able to change the id of a user.
+
+            // Should not be able to change the id of a user. ----------
         }
 
         private void SerializeAllEmployees()
