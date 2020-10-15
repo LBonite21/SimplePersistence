@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Simp
 {
@@ -48,12 +50,11 @@ namespace Simp
                     Environment.Exit(0);
                     break;
                 case 1:
-                    PrintEmployee(info.getPath("Add a file path"));
+                    PrintPeopleDetails(info.getPath("Add a file path"));
                     ChoiceSelected = true;
                     break;
-
                 case 2:
-                    PrintPeopleDetails(info.getPath("Add a file path"));
+                    PrintEmployee(info.getPath("Add a file path"));
                     ChoiceSelected = true;
                     break;
                 case 3:
@@ -84,6 +85,16 @@ namespace Simp
                         info.RequestString("Update First Name: "),
                         info.RequestString("Update New Last Name: "),
                         info.RequestInt("Update Hire Year: ")); 
+                    ChoiceSelected = true;
+                    break;
+                case 6:
+                    Console.WriteLine("\nSerialize Employees");
+                    SerializeAllEmployees(info.getPath("Add File Path to Store Serialized Employees"));
+                    ChoiceSelected = true;
+                    break;
+                case 7:
+                    Console.WriteLine("\nGet Employee");
+                    GetSerializedEmployee(info.getPath("Add a file path"), info.RequestInt("Enter Employee ID: "));
                     ChoiceSelected = true;
                     break;
                 default:
@@ -186,15 +197,52 @@ namespace Simp
             // Should not be able to change the id of a user. ----------
         }
 
-        private void SerializeAllEmployees()
+        private void SerializeAllEmployees(string path)
         {
             // Iterate through all the files in the ${path} directory
             // Create an Employee object for each file
             // Serialize each Employee object to the /${path}serialized/ directory in it's own file.
 
+            System.Console.WriteLine("\n");
+
+            string[] people = Directory.GetFiles(info.getPath("Add File Path to Get Employees"), "*.txt");
+            string[] persons;
+
+            foreach (string person in people)
+            {
+                string getTextFile = File.ReadAllText(person);
+                persons = getTextFile.Split(",");
+
+                for (int i = 0; i < persons.Length / 4; i++)
+                {
+                    int id = Int32.Parse(persons[0]);
+                    int hireYear = Int32.Parse(persons[3]);
+                    Employee newEmployee = new Employee(id, persons[1], persons[2], hireYear);
+                    System.Console.WriteLine(newEmployee);
+
+                    FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Create, FileAccess.Write);
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    try
+                    {
+                        formatter.Serialize(fs, newEmployee);
+                    }
+                    catch (SerializationException e)
+                    {
+                        Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+                        throw;
+                    }
+                    finally
+                    {
+                        fs.Close();
+                    }
+                    Console.WriteLine("Object Serialized");
+
+                }
+            }
+
         }
 
-        private void GetSerializedEmployee(int id)
+        private Employee GetSerializedEmployee(string path, int id)
         {
             // Takes an id as a parameter
             // Fetches the associated serialized employee file and de-serializes it to an Employee object

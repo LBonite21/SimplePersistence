@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Simp
 {
+    [Serializable]
     public class Employee
     {
         public int ID { get; set; }
