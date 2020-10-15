@@ -8,6 +8,7 @@ namespace Simp
 
         private bool ChoiceSelected;
         RecordsUI info = new RecordsUI();
+        private bool foundEmployee;
 
         public SimplePersistence()
         {
@@ -16,7 +17,7 @@ namespace Simp
 
         public void run()
         {
-            
+
 
             //while (!ChoiceSelected)
             //{
@@ -59,7 +60,7 @@ namespace Simp
                 case 3:
                     Console.WriteLine("\nAdd Employee\n");
                     AddEmployee(info.getPath("Add a file path"),
-                        info.RequestInt("Enter New Employee ID: "), 
+                        info.RequestInt("Enter New Employee ID: "),
                         info.RequestString("Enter First Name: "),
                         info.RequestString("Enter Last Name: "),
                         info.RequestInt("Enter Hire Year: "));
@@ -78,13 +79,19 @@ namespace Simp
                 case 5:
                     Console.WriteLine("Update Employee");
                     string filePath = info.getPath("Add a file path");
-                    int EmployeeID = SearchEmployee(info.RequestInt("What is the ID of the employee you are gonna update? "),filePath);
+                    int EmployeeID;
+                    do
+                    {
+                        EmployeeID = SearchEmployee(info.RequestInt("What is the ID of the employee you are gonna update? "), filePath);
+
+                    } while (!foundEmployee);
 
                     UpdateEmployee(filePath, EmployeeID,
-                        info.RequestString("Update First Name: "),
-                        info.RequestString("Update New Last Name: "),
-                        info.RequestInt("Update Hire Year: ")); 
+                    info.RequestString("Update First Name: "),
+                    info.RequestString("Update New Last Name: "),
+                    info.RequestInt("Update Hire Year: "));
                     ChoiceSelected = true;
+
                     break;
                 default:
                     System.Console.WriteLine("Please enter the number options of 1 or 2");
@@ -98,7 +105,6 @@ namespace Simp
 
         public void PrintEmployee(string path)
         {
-
 
             System.Console.WriteLine("\n");
 
@@ -144,7 +150,7 @@ namespace Simp
         {
             String EmployeeRawData = id.ToString() + ", " + firstName.ToUpper() + ", " + lastName.ToUpper() + ", " + HireYear.ToString();
 
-            System.IO.File.WriteAllText(path +$"{id}.txt", EmployeeRawData);
+            System.IO.File.WriteAllText(path + $"{id}.txt", EmployeeRawData);
 
             Employee newEmployee = new Employee(id, firstName, lastName, HireYear);
 
@@ -170,17 +176,30 @@ namespace Simp
 
         private int SearchEmployee(int id, string path)
         {
-            string[] people = Directory.GetFiles(path, $"{id}.txt");
-            string file = $"{id}.txt";
-            Console.WriteLine(System.IO.File.ReadAllText(people[0]));
+            foundEmployee = true;
+            try
+            {
+                string[] people = Directory.GetFiles(path, $"{id}.txt");
+                Console.WriteLine(System.IO.File.ReadAllText(people[0]));
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Employee ID not found");
+                foundEmployee = false;
+
+            }
+
+            //string file = $"{id}.txt";
+
+
             return id;
         }
 
-        private void UpdateEmployee(string path, int id,string  firstName,string lastName,int HireYear)
+        private void UpdateEmployee(string path, int id, string firstName, string lastName, int HireYear)
         {
             DeleteEmployee(path, id);
             AddEmployee(path, id, firstName, lastName, HireYear);
-            
+
 
             // Updates the correct file if it exists.
 
