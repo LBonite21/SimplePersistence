@@ -263,10 +263,33 @@ namespace Simp
 
         private Employee GetSerializedEmployee(string path, int id)
         {
+
             // Takes an id as a parameter
+            id = SearchEmployee(id, path);
             // Fetches the associated serialized employee file and de-serializes it to an Employee object
+            Employee newEmployee = null;
+            FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
+            try
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                newEmployee = (Employee)formatter.Deserialize(fs);
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+
             // Returns the Employee object
-            throw new NotImplementedException();
+
+            // Console.WriteLine(newEmployee);
+
+            return newEmployee;
         }
     }
 }
