@@ -96,7 +96,7 @@ namespace Simp
                     break;
                 case 6:
                     Console.WriteLine("\nSerialize Employees");
-                    SerializeAllEmployees(info.getPath("Add File Path to Store Serialized Employees"));
+                    SerializeAllEmployees(info.getPath("Add File Path"));
                     ChoiceSelected = true;
                     break;
                 case 7:
@@ -224,7 +224,7 @@ namespace Simp
 
             System.Console.WriteLine("\n");
 
-            string[] people = Directory.GetFiles(info.getPath("Add File Path to Get Employees"), "*.txt");
+            string[] people = Directory.GetFiles(path, "*.txt");
             string[] persons;
 
             foreach (string person in people)
@@ -239,7 +239,7 @@ namespace Simp
                     Employee newEmployee = new Employee(id, persons[1], persons[2], hireYear);
                     System.Console.WriteLine(newEmployee);
 
-                    FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Create, FileAccess.Write);
+                    FileStream fs = new FileStream($@"{path} serialized\{id}.txt", FileMode.Create, FileAccess.Write);
                     BinaryFormatter formatter = new BinaryFormatter();
                     try
                     {
