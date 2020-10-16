@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -291,5 +293,53 @@ namespace Simp
 
             return newEmployee;
         }
+
+        private Employee FindEmployee(int id)
+        {
+            //Searches all employee records for the first record with the given Id
+            //Returns the first matching record as an employee object
+            throw new NotImplementedException();
+        }
+
+        private Employee FindEmployeeByLastName(string lastName)
+        {
+            //Searches all employee records for the first record with the given lastName
+            //Returns the first matching record as an employee object
+            throw new NotImplementedException();
+        }
+
+        private List<Employee> FindAllEmployeesByLastName(string lastName)
+        {
+            //Searches all employee records for all employees with the given lastName
+            //Returns a list of matching Employee Records
+            throw new NotImplementedException();
+        }
+
+        private void PrintSerializedDetails(string path)
+        {
+            //Takes a path parameter
+            //Iterates over each serialized(.ser) file in the given path
+            //Deseralize the Employee Object and prints it's toString details
+            throw new NotImplementedException();
+        }
+
+        private Dictionary<int, Employee> GetAllEmployees(string path)
+        {
+            //Returns a Dictonary<int, Employee> C#
+            //Takes a path parameter
+            //Iterates over each serialized(.ser) file in the given path
+            //Deserialize the Employee Object
+            //Add the Employee object to a HashMap keyed by the employees Id
+            //Return the HashMap with all Employees records
+            throw new NotImplementedException();
+        }
+
+        private void PrintAllEmployees()
+        {
+            //Call GetAllEmployees above
+            //Loop through the values in your HashMap and print each Employees Details
+            throw new NotImplementedException();
+        }
+
     }
 }
