@@ -85,7 +85,7 @@ namespace Simp
                     int EmployeeID;
                     do
                     {
-                        EmployeeID = SearchEmployee(info.RequestInt("What is the ID of the employee you are gonna update? "), filePath).ID;
+                        EmployeeID = FindEmployeeById(info.RequestInt("What is the ID of the employee you are gonna update? "), filePath).ID;
 
                     } while (!foundEmployee);
 
@@ -186,40 +186,7 @@ namespace Simp
 
         }
 
-        private Employee SearchEmployee(int id, string path)
-        {
-            Employee SearchedPerson = new Employee();
-            foundEmployee = true;
-            try
-            {
-                string[] people = Directory.GetFiles(path, $"{id}.txt");
-                string[] peopleFound;
-
-
-                string getTextFile = File.ReadAllText(people[0]);
-                peopleFound = getTextFile.Split(",");
-
-                for (int i = 0; i < peopleFound.Length / 4; i++)
-                {
-                    int foundID = Int32.Parse(peopleFound[0]);
-                    int hireYear = Int32.Parse(peopleFound[3]);
-                    SearchedPerson = new Employee(foundID, peopleFound[1], peopleFound[2], hireYear);
-                
-                }
-                Console.WriteLine(SearchedPerson.ToString());
-            }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("Employee ID not found");
-                foundEmployee = false;
-
-            }
-
-            //string file = $"{id}.txt";
-
-
-            return SearchedPerson;
-        }
+        
 
         private void UpdateEmployee(string path, int id, string firstName, string lastName, int HireYear)
         {
@@ -281,7 +248,7 @@ namespace Simp
         {
 
             // Takes an id as a parameter
-            id = SearchEmployee(id, path).ID;
+            id = FindEmployeeById(id, path).ID;
             // Fetches the associated serialized employee file and de-serializes it to an Employee object
             Employee newEmployee = null;
             FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
@@ -308,11 +275,39 @@ namespace Simp
             return newEmployee;
         }
 
-        private Employee FindEmployeeById(int id)
+        private Employee FindEmployeeById(int id, string path)
         {
-            //Searches all employee records for the first record with the given Id
-            //Returns the first matching record as an employee object
-            throw new NotImplementedException();
+            Employee SearchedPerson = new Employee();
+            foundEmployee = true;
+            try
+            {
+                string[] people = Directory.GetFiles(path, $"{id}.txt");
+                string[] peopleFound;
+
+
+                string getTextFile = File.ReadAllText(people[0]);
+                peopleFound = getTextFile.Split(",");
+
+                for (int i = 0; i < peopleFound.Length / 4; i++)
+                {
+                    int foundID = Int32.Parse(peopleFound[0]);
+                    int hireYear = Int32.Parse(peopleFound[3]);
+                    SearchedPerson = new Employee(foundID, peopleFound[1], peopleFound[2], hireYear);
+
+                }
+                Console.WriteLine(SearchedPerson.ToString());
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Employee ID not found");
+                foundEmployee = false;
+
+            }
+
+            //string file = $"{id}.txt";
+
+
+            return SearchedPerson;
         }
 
         private Employee FindEmployeeByLastName(string path, string lastName)
