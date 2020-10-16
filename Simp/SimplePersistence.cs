@@ -301,11 +301,27 @@ namespace Simp
             throw new NotImplementedException();
         }
 
-        private Employee FindEmployeeByLastName(string lastName)
+        private Employee FindEmployeeByLastName(string path, string lastName)
         {
             //Searches all employee records for the first record with the given lastName
             //Returns the first matching record as an employee object
-            throw new NotImplementedException();
+
+            Employee getEmployee = new Employee();
+
+            foundEmployee = true;
+            try
+            {
+                string[] people = Directory.GetFiles(path, "*.txt");
+                Console.WriteLine(File.ReadAllText(people[0]));
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Employee not found");
+                foundEmployee = false;
+
+            }
+
+            return getEmployee;
         }
 
         private List<Employee> FindAllEmployeesByLastName(string lastName)
