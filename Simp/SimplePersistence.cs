@@ -308,7 +308,7 @@ namespace Simp
             return newEmployee;
         }
 
-        private Employee FindEmployee(int id)
+        private Employee FindEmployeeById(int id)
         {
             //Searches all employee records for the first record with the given Id
             //Returns the first matching record as an employee object
