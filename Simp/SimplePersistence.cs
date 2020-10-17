@@ -40,7 +40,7 @@ namespace Simp
 
         }
 
-        //C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple
+
 
         public bool Selection(int UserSelction)
         {
@@ -104,6 +104,14 @@ namespace Simp
                 case 7:
                     Console.WriteLine("\nGet Employee");
                     GetSerializedEmployee(info.getPath("Add a file path"), info.RequestInt("Enter Employee ID: "));
+                    ChoiceSelected = true;
+                    break;
+                case 8:
+
+                    break;
+                case 9:
+                    Console.WriteLine("\nSearch Employee By Last Name");
+                    FindEmployeeByLastName(info.getPath("Add a file path"), info.RequestString("Enter Employee Last Name: "));
                     ChoiceSelected = true;
                     break;
                 default:
@@ -186,7 +194,7 @@ namespace Simp
 
         }
 
-        
+
 
         private void UpdateEmployee(string path, int id, string firstName, string lastName, int HireYear)
         {
@@ -310,18 +318,48 @@ namespace Simp
             return SearchedPerson;
         }
 
+        //C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple
+
         private Employee FindEmployeeByLastName(string path, string lastName)
         {
             //Searches all employee records for the first record with the given lastName
             //Returns the first matching record as an employee object
 
-            Employee getEmployee = new Employee();
-
+            Employee SearchedPerson = new Employee();
             foundEmployee = true;
             try
             {
                 string[] people = Directory.GetFiles(path, "*.txt");
-                Console.WriteLine(File.ReadAllText(people[0]));
+                string[] persons;
+                int count = 0;
+
+                foreach (string person in people)
+                {
+                    string getTextFile = File.ReadAllText(person);
+                    persons = getTextFile.Split(", ");
+
+
+                    for (int i = 0; i < persons.Length / 4; i++)
+                    {
+                        
+                        count++;
+                        if (lastName.ToLower() == persons[2].ToLower())
+                        {
+                            int id = Int32.Parse(persons[0]);
+                            int hireYear = Int32.Parse(persons[3]);
+                            SearchedPerson = new Employee(id, persons[1], persons[2], hireYear);
+                            Console.WriteLine(SearchedPerson.ToString());
+                        }
+                        else if (count == people.Length)
+                        {
+                            Console.WriteLine("\nEmployee not found.");
+                        }
+
+                    }
+
+
+                }
+
             }
             catch (IndexOutOfRangeException)
             {
@@ -330,7 +368,7 @@ namespace Simp
 
             }
 
-            return getEmployee;
+            return SearchedPerson;
         }
 
         private List<Employee> FindAllEmployeesByLastName(string lastName)
