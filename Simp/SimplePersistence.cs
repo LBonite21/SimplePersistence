@@ -403,7 +403,7 @@ namespace Simp
             {
                 string getTextFile = System.IO.File.ReadAllText(person);
 
-                //FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
+                //FileStream fs = new FileStream($@"{path}\{}.txt", FileMode.Open);
 
                 //deserializedPeople = (Employee)formatter.Deserialize(fs);
 
