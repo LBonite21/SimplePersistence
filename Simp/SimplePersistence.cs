@@ -318,7 +318,7 @@ namespace Simp
             return SearchedPerson;
         }
 
-        //C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple
+        
 
         private Employee FindEmployeeByLastName(string path, string lastName)
         {
@@ -332,6 +332,8 @@ namespace Simp
                 string[] people = Directory.GetFiles(path, "*.txt");
                 string[] persons;
                 int count = 0;
+                int foundOnce = 0;
+                bool firstFind = false;
 
                 foreach (string person in people)
                 {
@@ -345,14 +347,21 @@ namespace Simp
                         count++;
                         if (lastName.ToLower() == persons[2].ToLower())
                         {
+                            foundOnce++;
                             int id = Int32.Parse(persons[0]);
                             int hireYear = Int32.Parse(persons[3]);
                             SearchedPerson = new Employee(id, persons[1], persons[2], hireYear);
-                            Console.WriteLine(SearchedPerson.ToString());
+                            firstFind = true;
                         }
-                        else if (count == people.Length)
+                        else if (count == people.Length && !firstFind)
                         {
                             Console.WriteLine("\nEmployee not found.");
+                        }
+
+                        if (foundOnce == 1)
+                        {
+                            Console.WriteLine("\n" + SearchedPerson.ToString());
+
                         }
 
                     }
@@ -370,6 +379,8 @@ namespace Simp
 
             return SearchedPerson;
         }
+
+        //C:\Users\Lemuel Bonite\source\repos\SuperLemon21\SimplePersistence\Simp\people\simple
 
         private List<Employee> FindAllEmployeesByLastName(string lastName)
         {
