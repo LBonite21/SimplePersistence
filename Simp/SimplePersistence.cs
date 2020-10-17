@@ -392,8 +392,32 @@ namespace Simp
         private void PrintSerializedDetails(string path)
         {
             //Takes a path parameter
+            string[] serializedPeople = Directory.GetFiles(path, "*.ser");
+
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            Employee[] deserializedPeople;
             //Iterates over each serialized(.ser) file in the given path
+
+            foreach (string person in serializedPeople)
+            {
+                string getTextFile = System.IO.File.ReadAllText(person);
+
+                //FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
+
+                //deserializedPeople = (Employee)formatter.Deserialize(fs);
+
+                //fs.Close();
+
+                System.Console.WriteLine(getTextFile);
+            }
+
+            
+
+            
+
             //Deseralize the Employee Object and prints it's toString details
+
             throw new NotImplementedException();
         }
 
