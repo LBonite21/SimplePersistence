@@ -31,6 +31,7 @@
         {
             System.Console.Write(message);
             int input = int.Parse(System.Console.ReadLine());
+            System.Console.WriteLine();
             return input;
         }
 
@@ -38,6 +39,7 @@
         {
             System.Console.Write(message);
             string input = System.Console.ReadLine();
+            System.Console.WriteLine();
 
             return input;
         }

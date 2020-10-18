@@ -123,6 +123,7 @@ namespace Simp
                 case 11:
                     Console.WriteLine("\nPrint All Employees");
                     PrintAllEmployees();
+                    ChoiceSelected = true;
                     break;
                 default:
                     System.Console.WriteLine("Please enter the number options of 1 or 2");
@@ -550,7 +551,7 @@ namespace Simp
                         }
 
                         getEmployees.Add(id, SearchedPerson);
-                        Console.WriteLine(getEmployees);
+                        //Console.WriteLine(getEmployees);
 
                     }
 
@@ -573,7 +574,11 @@ namespace Simp
         {
             //Call GetAllEmployees above
             //Loop through the values in your HashMap and print each Employees Details
-            throw new NotImplementedException();
+
+            foreach (var item in GetAllEmployees(info.RequestString("\nAdd File Path\n")).Values)
+            {
+                Console.WriteLine(item);
+            }
         }
 
     }
