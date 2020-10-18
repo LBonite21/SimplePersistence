@@ -45,7 +45,7 @@
         public string getPath(string message)
         {
             System.Console.WriteLine(message);
-            string usersPath = System.Console.ReadLine() + @"\";
+            string usersPath = System.Console.ReadLine();
 
             //Console.WriteLine(usersPath + @"\");
             //PrintEmployee(usersPath + @"\");

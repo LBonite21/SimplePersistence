@@ -447,22 +447,36 @@ namespace Simp
         private void PrintSerializedDetails(string path)
         {
             //Takes a path parameter
+
             string[] serializedPeople = Directory.GetFiles(path, "*.ser");
 
             BinaryFormatter formatter = new BinaryFormatter();
 
             Employee[] deserializedPeople;
+
+            String[] RawPersonData;
             //Iterates over each serialized(.ser) file in the given path
 
             foreach (string person in serializedPeople)
             {
                 string getTextFile = System.IO.File.ReadAllText(person);
 
-                //FileStream fs = new FileStream($@"{path}\{}.txt", FileMode.Open);
+                RawPersonData = getTextFile.Split(", ");
 
-                //deserializedPeople = (Employee)formatter.Deserialize(fs);
+                for (int i = 0; i < RawPersonData.Length / 4; i++)
+                {
+                    int id = Int32.Parse(RawPersonData[0]);
+                    int hireYear = Int32.Parse(RawPersonData[3]);
+                    Employee DeserializedPerson = new Employee(id, RawPersonData[1], RawPersonData[2], hireYear);
+                
+                }
 
-                //fs.Close();
+                //FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
+                
+
+                //deserializedpeople = (employee)formatter.deserialize(fs);
+
+                //fs.close();
 
                 System.Console.WriteLine(getTextFile);
             }
