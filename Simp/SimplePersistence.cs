@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -118,6 +119,10 @@ namespace Simp
                     Console.WriteLine("\nSearch All Employees By Last Name");
                     FindAllEmployeesByLastName(info.getPath("Add a file path"), info.RequestString("Enter Employee Last Name: "));
                     ChoiceSelected = true;
+                    break;
+                case 11:
+                    Console.WriteLine("\nPrint All Employees");
+                    PrintAllEmployees();
                     break;
                 default:
                     System.Console.WriteLine("Please enter the number options of 1 or 2");
@@ -262,14 +267,18 @@ namespace Simp
 
             // Takes an id as a parameter
             id = FindEmployeeById(id, path).ID;
+            Console.WriteLine($@"{path} serialized\{id}.txt");
+            //Console.WriteLine(FindEmployeeById(id, path).ID);
             // Fetches the associated serialized employee file and de-serializes it to an Employee object
             Employee newEmployee = null;
-            FileStream fs = new FileStream($@"{path}\{id}.txt", FileMode.Open);
+            FileStream fs = new FileStream($@"{path} serialized\{id}.txt", FileMode.Open);
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();
 
                 newEmployee = (Employee)formatter.Deserialize(fs);
+
+                //Console.WriteLine(newEmployee.FirstName + " " + newEmployee.LastName);
             }
             catch (SerializationException e)
             {
@@ -323,7 +332,7 @@ namespace Simp
             return SearchedPerson;
         }
 
-        
+
 
         private Employee FindEmployeeByLastName(string path, string lastName)
         {
@@ -348,7 +357,7 @@ namespace Simp
 
                     for (int i = 0; i < persons.Length / 4; i++)
                     {
-                        
+
                         count++;
                         if (lastName.ToLower() == persons[2].ToLower())
                         {
@@ -467,9 +476,9 @@ namespace Simp
                 System.Console.WriteLine(getTextFile);
             }
 
-            
 
-            
+
+
 
             //Deseralize the Employee Object and prints it's toString details
 
@@ -484,7 +493,66 @@ namespace Simp
             //Deserialize the Employee Object
             //Add the Employee object to a HashMap keyed by the employees Id
             //Return the HashMap with all Employees records
-            throw new NotImplementedException();
+
+            Dictionary<int, Employee> getEmployees = new Dictionary<int, Employee>();
+
+            foundEmployee = true;
+            try
+            {
+                string[] people = Directory.GetFiles(path, "*.txt");
+                string[] persons;
+
+                foreach (string person in people)
+                {
+                    string getTextFile = File.ReadAllText(person);
+                    persons = getTextFile.Split(", ");
+
+
+                    for (int i = 0; i < persons.Length / 4; i++)
+                    {
+                        int id = Int32.Parse(persons[0]);
+                        string firstName = persons[1];
+                        string lastName = persons[2];
+                        int hireYear = Int32.Parse(persons[3]);
+                        Employee SearchedPerson = new Employee(id, firstName, lastName, hireYear);
+
+                        FileStream fs = new FileStream($@"{path} serialized\{id}.txt", FileMode.Open);
+                        try
+                        {
+                            BinaryFormatter formatter = new BinaryFormatter();
+
+                            SearchedPerson = (Employee)formatter.Deserialize(fs);
+
+                            //Console.WriteLine(newEmployee.FirstName + " " + newEmployee.LastName);
+                        }
+                        catch (SerializationException e)
+                        {
+                            Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                            throw;
+                        }
+                        finally
+                        {
+                            fs.Close();
+                        }
+
+                        getEmployees.Add(id, SearchedPerson);
+                        Console.WriteLine(getEmployees);
+
+                    }
+
+                }
+
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Employee not found");
+                foundEmployee = false;
+
+            }
+
+
+            return getEmployees;
+
         }
 
         private void PrintAllEmployees()
